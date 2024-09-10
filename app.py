@@ -1,6 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, send_from_directory
 import os
-from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
 
@@ -20,17 +19,16 @@ def index():
 def upload_image():
     if 'file' not in request.files:
         return redirect(request.url)
-
+    
     file = request.files['file']
-
+    
     if file.filename == '':
-        return "No file selected"
+        return redirect(request.url)
     
     if file:
-        filename = secure_filename(file.filename)
-        filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+        filepath = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
         file.save(filepath)
-        return f"Image uploaded successfully at {filepath}!"
+        return "Image uploaded successfully!"
 
 @app.route('/uploads/<filename>')
 def send_uploaded_file(filename):

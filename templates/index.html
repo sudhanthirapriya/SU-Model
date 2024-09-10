@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webcam App with Age and Emotion Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            color: #333;
+            text-align: center;
+        }
+
+        h1 {
+            color: #4682b4;
+        }
+
+        .container {
+            margin: 20px auto;
+            width: 70%;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        video {
+            border: 3px solid #4682b4;
+            border-radius: 8px;
+            width: 80%;
+            height: auto;
+        }
+
+        .output-box {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #dff0d8;
+            border: 2px solid #3c763d;
+            border-radius: 8px;
+            color: #3c763d;
+            display: inline-block;
+            font-size: 18px;
+            width: 60%;
+        }
+
+        .button-group {
+            margin-top: 20px;
+        }
+
+        .button-group button {
+            background-color: #4682b4;
+            color: white;
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .button-group button:hover {
+            background-color: #5a9bd5;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Live Webcam with Age and Emotion Prediction</h1>
+        <p>Watch live predictions below!</p>
+
+        <video id="video" autoplay playsinline></video>
+
+        <div class="output-box" id="output-box">
+            Age: <span id="age">Calculating...</span><br>
+            Emotion: <span id="emotion">Detecting...</span>
+        </div>
+
+        <div class="button-group">
+            <button onclick="hireMe()">Hire Me</button>
+            <button onclick="contactMe()">Contact Me</button>
+        </div>
+
+        <h3>Upload an Image</h3>
+        <form action="/upload" method="POST" enctype="multipart/form-data">
+            <input type="file" name="file">
+            <input type="submit" value="Upload Image">
+        </form>
+    </div>
+
+    <script>
+        // Access webcam video stream
+        const video = document.getElementById('video');
+        const ageElement = document.getElementById('age');
+        const emotionElement = document.getElementById('emotion');
+
+        // Dummy age and emotion values
+        const age = "25";
+        const emotion = "Happy";
+
+        async function setupCamera() {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+                video.srcObject = stream;
+
+                // Show dummy data after video starts
+                video.addEventListener('play', () => {
+                    ageElement.textContent = age;
+                    emotionElement.textContent = emotion;
+                });
+
+            } catch (error) {
+                console.error("Unable to access the camera: ", error);
+                alert("Unable to access the camera. Please check permissions.");
+            }
+        }
+
+        // Start webcam
+        setupCamera();
+
+        // Button functions
+        function hireMe() {
+            window.open('https://www.linkedin.com/in/your-linkedin-profile', '_blank');
+        }
+
+        function contactMe() {
+            window.open('https://your-portfolio-link.com', '_blank');
+        }
+    </script>
+</body>
+</html>

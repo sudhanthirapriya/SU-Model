@@ -1,5 +1,7 @@
-﻿Werkzeug==3.0.4
-gunicorn==23.0.0
-Flask==3.0.3
-Flask-Cors==5.0.0
-requests==2.32.3
+Flask==2.3.2
+tensorflow==2.13.0
+Pillow==10.0.0
+numpy==1.24.3
+opencv-python-headless==4.8.0.76
+gunicorn==20.1.0  # Add this line
+

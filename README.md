@@ -1,2 +1,2 @@
 # SU-Model
-Real time age and emotion prediction model
+Real time text to image generation model
